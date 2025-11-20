@@ -3,10 +3,8 @@ import axios from "axios";
 import jwt from "jsonwebtoken";
 import User from "../models/User"; // Corrected path relative to server/src/
 import bcrypt from "bcrypt";
-
 const { GITHUB_ID, GITHUB_SECRET, JWT_SECRET, COOKIE_NAME, NEXTAUTH_URL } =
   process.env;
-
 // Helper to create a session token and set it as a cookie
 const setTokenCookie = (res: Response, userId: string) => {
   const token = jwt.sign({ userId }, JWT_SECRET as string, { expiresIn: "7d" });
@@ -17,7 +15,6 @@ const setTokenCookie = (res: Response, userId: string) => {
     path: "/",
   });
 };
-
 // Email/Password signup
 export const signup = async (req: Request, res: Response) => {
   try {

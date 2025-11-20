@@ -1,5 +1,4 @@
 import mongoose, { Schema, Document } from "mongoose";
-
 // Best Practice: Define an interface for your document for type safety.
 export interface IUser extends Document {
   name: string;
@@ -7,7 +6,6 @@ export interface IUser extends Document {
   passwordHash?: string; // Optional for OAuth users
   authProvider?: string; // e.g., "github|12345"
 }
-
 const userSchema = new Schema<IUser>(
   {
     name: { type: String, required: true },
@@ -17,9 +15,7 @@ const userSchema = new Schema<IUser>(
   },
   { timestamps: true }
 );
-
 // The Fix: Use 'export default' instead of 'export const'.
 // This pattern also prevents Next.js from recompiling the model on every hot-reload.
 const User = mongoose.models.User || mongoose.model<IUser>("User", userSchema);
-
 export default User;

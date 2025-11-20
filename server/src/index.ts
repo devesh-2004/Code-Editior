@@ -4,14 +4,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import authRoutes from "./routes/authRoutes";
-
 // Load environment variables from the root .env file
 dotenv.config();
-
 const app = express();
-
 const { PORT = 5000, NEXTAUTH_URL, MONGO_URI } = process.env;
-
 // Connect to MongoDB
 if (MONGO_URI) {
   mongoose
@@ -21,7 +17,6 @@ if (MONGO_URI) {
 } else {
   console.error("MONGO_URI is not defined in the .env file.");
 }
-
 // Essential Middleware
 app.use(
   cors({
@@ -31,11 +26,9 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-
 // API Routes
 app.use("/api/auth", authRoutes);
 // You can add other routes here if needed
-
 // Start the server
 app.listen(PORT, () =>
   console.log(`✅ Backend server running on http://localhost:${PORT}`)
