@@ -130,7 +130,8 @@ async function startServer() {
 
     // Parse JSON and cookies
     app.use(express.json());
-    app.use(cookieParser());
+    // @ts-ignore
+app.use(cookieParser());
 
     // CORS
     app.use(

@@ -1,0 +1,29 @@
+{
+  "name": "code-editor-backend",
+  "version": "1.0.0",
+  "description": "Backend for Code Editor",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev src/index.ts"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "dotenv": "^17.2.3",
+    "cors": "^2.8.5",
+    "socket.io": "^4.8.1",
+    "helmet": "^8.1.0",
+    "express-rate-limit": "^8.2.1",
+    "cookie-parser": "^1.4.7",
+    "jsonwebtoken": "^9.0.2",
+    "@google/generative-ai": "^0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "@types/express": "^5.0.0",
+    "@types/cors": "^2.8.0",
+    "ts-node-dev": "^2.0.0"
+  }
+}
