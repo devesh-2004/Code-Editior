@@ -54,7 +54,8 @@ export const generateContent = async (req: Request, res: Response) => {
       timeout: 30_000,
     });
 
-    const candidates = apiRes.data?.candidates ?? apiRes.data?.output ?? null;
+    const data = apiRes.data as any;
+    const candidates = data?.candidates ?? data?.output ?? null;
     let textOut = "";
 
     if (Array.isArray(candidates) && candidates.length > 0) {
@@ -67,20 +68,20 @@ export const generateContent = async (req: Request, res: Response) => {
           candidates[0]?.output ??
           JSON.stringify(candidates[0]);
       }
-    } else if (typeof apiRes.data?.text === "string") {
-      textOut = apiRes.data.text;
+    } else if (typeof data?.text === "string") {
+      textOut = data.text;
     } else {
-      textOut = JSON.stringify(apiRes.data);
+      textOut = JSON.stringify(data);
     }
 
     return res.json({ text: textOut });
-  } catch (err: unknown) {
-    const errorData = axios.isAxiosError(err) ? err.response?.data : (err instanceof Error ? err.message : String(err));
+  } catch (err: any) {
+    const errorData = err.response?.data || (err instanceof Error ? err.message : String(err));
     console.error(
       "AI generate error details:",
       JSON.stringify(errorData, null, 2)
     );
-    const status = axios.isAxiosError(err) ? err.response?.status ?? 500 : 500;
+    const status = (err.response?.status) ?? 500;
     const message = errorData || { error: "AI generation failed" };
     return res.status(status).json({ error: message });
   }
