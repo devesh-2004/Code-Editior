@@ -1,6 +1,5 @@
 {
   "framework": "nextjs",
   "buildCommand": "cd client && npm run build",
-  "outputDirectory": "client/.next",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- client/"
+  "outputDirectory": "client/.next"
 }
