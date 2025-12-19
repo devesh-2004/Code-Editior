@@ -1,12 +1,12 @@
 "use client";
 
-import { supabase } from "../lib/supabaseClient";
+import { signIn } from "next-auth/react";
 
 export async function login(email: string, password: string) {
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const result = await signIn("credentials", {
     email,
     password,
+    redirect: false,
   });
-  if (error) console.error(error);
-  return data;
+  return result;
 }

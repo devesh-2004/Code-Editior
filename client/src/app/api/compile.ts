@@ -26,7 +26,7 @@ export default async function handler(
     const out = data.run?.output ?? data.run?.stdout ?? "";
 
     res.status(200).json({ output: out, raw: data });
-  } catch (err: any) {
-    res.status(500).json({ error: err.message });
+  } catch (err: unknown) {
+    res.status(500).json({ error: err instanceof Error ? err.message : String(err) });
   }
 }

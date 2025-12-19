@@ -15,6 +15,7 @@ export async function POST(req: Request) {
     const runtimesRes = await fetch("https://emkc.org/api/v2/piston/runtimes");
     const runtimes = await runtimesRes.json();
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const runtime = runtimes.find((r: any) => r.language === language);
     if (!runtime) {
       return NextResponse.json(
@@ -43,9 +44,9 @@ export async function POST(req: Request) {
       "⚠️ No output";
 
     return NextResponse.json({ output: out, raw: data });
-  } catch (err: any) {
+  } catch (err: unknown) {
     return NextResponse.json(
-      { error: err.message || "Server error" },
+      { error: (err instanceof Error ? err.message : String(err)) || "Server error" },
       { status: 500 }
     );
   }

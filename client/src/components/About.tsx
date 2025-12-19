@@ -2,7 +2,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const FeatureCard = ({ icon: Icon, title, description, delay }) => (
+interface FeatureCardProps {
+  icon: React.ElementType<{ className?: string }>;
+  title: string;
+  description: string;
+  delay: number;
+}
+
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description, delay }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
@@ -33,7 +40,7 @@ const About = () => {
 
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-gray-300 mb-10">
-            Real-time collaborative code editor for developers
+            AI powered Real-time collaborative code editor for developers
           </p>
 
           {/* Call-to-Action Buttons */}
