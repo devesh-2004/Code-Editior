@@ -4,7 +4,10 @@
 .pnp.js
 
 # next.js build
-/.next/
+# next.js build
+.next/
+client/.next/
+**/.next/
 /out/
 /dist
 /server/dist/

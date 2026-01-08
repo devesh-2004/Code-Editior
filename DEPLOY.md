@@ -22,7 +22,9 @@ This project requires a **Split Deployment** because it uses `Socket.IO` for rea
 1.  Go to [Vercel.com](https://vercel.com) > Add New > Project.
 2.  Connect your repo.
 3.  **Settings**:
-    - **Root Directory**: `client`
+    - **Root Directory**: `.` (Leave empty / Root)
+    - **Build Command**: `npx next build ./client`
+    - **Output Directory**: `client/.next`
     - **Framework Preset**: Next.js
 4.  **Environment Variables**:
     - `NEXT_PUBLIC_BACKEND_API_URL`: Set this to your **Render Backend URL** (e.g., `https://api-123.onrender.com/api`).

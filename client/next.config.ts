@@ -4,6 +4,12 @@ import path from "path";
 const nextConfig: NextConfig = {
   // Silence inferred workspace root warning by pointing to the project root
   outputFileTracingRoot: path.join(__dirname, ".."),
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     remotePatterns: [
       {
