@@ -38,3 +38,14 @@ This project requires a **Split Deployment** because it uses `Socket.IO` for rea
 ## 4. Local Development
 - Use `.env` (don't commit it!).
 - `npm run dev` starts both locally.
+
+## 5. Troubleshooting
+
+### Vercel Error: `sh: line 1: cd: client: No such file or directory`
+This means your **Root Directory** setting in Vercel is incorrect.
+1.  Go to Vercel Project Settings > General.
+2.  **Root Directory**: Ensure this is empty or set to `.` (Current Directory).
+    - *Incorrect*: `client`
+    - *Correct*: `.`
+3.  **Build Command**: Ensure this is `npx next build ./client`.
+
