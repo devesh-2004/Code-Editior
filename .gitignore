@@ -28,3 +28,6 @@ client/.next/
 .env.development.local
 .env.test.local
 .env.production.localnode_modules/
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat

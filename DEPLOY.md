@@ -44,3 +44,17 @@ This project requires a **Split Deployment** because it uses `Socket.IO` for rea
 - Go to your Google Cloud Console for the OAuth credentials.
 - Add your Vercel domain to **Authorized JavaScript origins**: `https://your-app.vercel.app`
 - Add the callback path to **Authorized redirect URIs**: `https://your-app.vercel.app/api/auth/callback/google`
+
+## 5. Troubleshooting
+
+### Google Login Error: `redirect_uri_mismatch`
+If you see an "Access blocked: This app's request is invalid" error with `Error 400: redirect_uri_mismatch`:
+
+1.  **Check Vercel Environment Variables**:
+    *   Go to your Vercel Project Dashboard > Settings > Environment Variables.
+    *   Ensure `NEXTAUTH_URL` is set to your **Production URL** (e.g., `https://nexus-code-editor-azure.vercel.app`).
+    *   **CRITICAL**: Do **NOT** use `http://localhost:3000` in Vercel.
+    *   **CRITICAL**: Do **NOT** have a trailing slash (e.g., `...app/` -> `...app`).
+
+2.  **Check Google Cloud Console**:
+    *   Ensure the "Authorized redirect URI" exactly matches: `https://nexus-code-editor-azure.vercel.app/api/auth/callback/google`
