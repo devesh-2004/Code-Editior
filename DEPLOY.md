@@ -14,8 +14,9 @@ This project requires a **Split Deployment** because it uses `Socket.IO` for rea
     - **Build Command**: `npm install && npm run build`
     - **Start Command**: `npm start`
 5.  **Environment Variables**:
-    - Add keys from `.env.example` (e.g., `GEMINI_API_KEY`).
-    - Set `CLIENT_URL` to your future Vercel URL (e.g., `https://your-app.vercel.app`).
+    - `PORT`: `10000` (or leave default)
+    - `CLIENT_URL`: Your future Vercel URL (e.g., `https://your-app.vercel.app`) - *Update this after deploying frontend*.
+    - `GEMINI_API_KEY`: Your key.
 6.  **Deploy**. Copy the provided URL (e.g., `https://api-123.onrender.com`).
 
 ## 2. Deploy Frontend (Vercel)
@@ -26,26 +27,20 @@ This project requires a **Split Deployment** because it uses `Socket.IO` for rea
     - **Build Command**: `npx next build ./client`
     - **Output Directory**: `client/.next`
     - **Framework Preset**: Next.js
-4.  **Environment Variables**:
-    - `NEXT_PUBLIC_BACKEND_API_URL`: Set this to your **Render Backend URL** (e.g., `https://api-123.onrender.com/api`).
-    - Add `GITHUB_ID`, `GITHUB_SECRET`, etc.
+4.  **Environment Variables** (CRITICAL):
+    - `NEXT_PUBLIC_BACKEND_API_URL`: Your **Render Backend URL** (e.g., `https://api-123.onrender.com/api`).
+    - `AUTH_GOOGLE_ID`: Your Google Client ID.
+    - `AUTH_GOOGLE_SECRET`: Your Google Client Secret.
+    - `NEXTAUTH_SECRET`: **Generate a secure random string**. Run `openssl rand -base64 32` in terminal to get one.
+    - `NEXTAUTH_URL`: Your Vercel URL (e.g., `https://your-app.vercel.app`).
 5.  **Deploy**.
 
 ## 3. Final Connection
-- Once Vercel is deployed, go back to Render and update `CLIENT_URL` to match your *actual* Vercel domain.
-- Redeploy Backend.
+- Once Vercel is deployed, go back to Render Dashboard -> Environment Variables.
+- Update `CLIENT_URL` to match your *actual* Vercel domain (no trailing slash).
+- Redeploy Backend (Manual Deploy > Deploy latest commit).
 
-## 4. Local Development
-- Use `.env` (don't commit it!).
-- `npm run dev` starts both locally.
-
-## 5. Troubleshooting
-
-### Vercel Error: `sh: line 1: cd: client: No such file or directory`
-This means your **Root Directory** setting in Vercel is incorrect.
-1.  Go to Vercel Project Settings > General.
-2.  **Root Directory**: Ensure this is empty or set to `.` (Current Directory).
-    - *Incorrect*: `client`
-    - *Correct*: `.`
-3.  **Build Command**: Ensure this is `npx next build ./client`.
-
+## 4. Google Cloud Console
+- Go to your Google Cloud Console for the OAuth credentials.
+- Add your Vercel domain to **Authorized JavaScript origins**: `https://your-app.vercel.app`
+- Add the callback path to **Authorized redirect URIs**: `https://your-app.vercel.app/api/auth/callback/google`
